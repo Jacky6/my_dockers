@@ -1,0 +1,19 @@
+From base:v1
+
+
+
+## ocr dev api
+# python
+RUN pip install alibabacloud_ocr_api20210707==3.0.0
+# js/ts
+RUN npm install @alicloud/ocr-api20210707@3.0.0
+# golang
+RUN go get github.com/alibabacloud-go/ocr-api-20210707/v3   
+# php
+RUN composer require alibabacloud/ocr-api-20210707 3.0.0
+# c#
+RUN dotnet add package AlibabaCloud.SDK.Ocr-api20210707 --version 3.0.0 
+
+
+
+
