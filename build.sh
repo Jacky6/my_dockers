@@ -5,21 +5,22 @@
 # 
 
 # set env
-base_version=v1
-dev_version=v0.1
+# base_version=v1
+# dev_version=v0.1
+version=""
 type=""
 function use_age(){
     echo "sh build.sh"
     echo ""
 }
 
-while getopts t:h: opt; do
+while getopts t:v:h: opt; do
     case $opt in
-        t)
-            type=$OPTARG
+        t)  type=$OPTARG
             ;;
-        h)
-            use_age
+        v)  version=$OPTARG
+            ;;
+        h)  use_age
             exit 0
             ;;
         \?)
@@ -33,15 +34,23 @@ while getopts t:h: opt; do
     esac
 done
 
+if [ -z $version ]; then
+    echo "version is empty"
+    exit -1
+fi
 
 case $type in
     dev)
         echo "dev"
-        docker build -t ocr_dev:${dev_version} -f Dockerfile.dev .
+        docker build -t ocr_dev:${version} -f Dockerfile.dev .
         ;;
     base)
         echo "base"
-        docker build -t base:${base_version} -f Dockerfile.base .
+        docker build -t base:${version} -f Dockerfile.base .
+        ;;
+    ocr)
+        echo "build ocr image $version"
+        docker build -t ocr:${version} -f Dockerfile.ocr .
         ;;
     *)
         echo "type error"

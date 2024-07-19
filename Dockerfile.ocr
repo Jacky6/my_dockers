@@ -1,6 +1,7 @@
 From base:v1
 
-
+RUN adduser -h /home/ocr -D -s /bin/bash -S ocr
+RUN su ocr && cd /home/ocr 
 
 ## ocr dev api
 # python
