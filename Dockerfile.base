@@ -1,32 +1,18 @@
 # base image
-FROM alpine 
+FROM ubuntu:22.04
 
+RUN cp /etc/apt/source.list /etc/apt/source.list.bk
 
-RUN set -x \
-  && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-  && apk update \
-  && apk add --no-cache tzdata vim openssl openssh openssl-dev bash curl libevent \
-  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-  && apk del tzdata
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse" >> /etc/apt/source.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse" > /etc/apt/source.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse" > /etc/apt/source.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" > /etc/apt/source.list
 
+RUN apt-get update
 
-# install 
-RUN apk add build-base
+RUN apt-get install zsh oh-my-zsh
 
-RUN apk add python3 \
-    && apk add py3-pip
-
-RUN apk add nodejs \
-    && apk add npm
-
-RUN apk add go
-
-RUN set -x \
-  && apk update \
-  && apk add --no-cache php7 \
-  php7-ctype php7-curl php7-json php7-fileinfo php7-iconv \
-  php7-mbstring php7-openssl php7-pcntl php7-pdo php7-pdo_mysql \
-  php7-posix php7-session php7-pecl-event
+RUN apt-get install build-base
 
 CMD ["/bin/bash"]
 
