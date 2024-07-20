@@ -12,7 +12,7 @@ FROM ubuntu:22.04
 RUN apt-get update && apt-get upgrade
 
 #base tools
-RUN apt install curl wget git vim -y 
+RUN apt install curl wget git vim jq -y 
 RUN apt install zsh -y && chsh -s /bin/zsh
 RUN sh -c "$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)"
 

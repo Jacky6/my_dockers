@@ -5,8 +5,10 @@
 # 
 
 # set env
-# base_version=v1
-# dev_version=v0.1
+# now base version is 0.1
+# now dev version is 0.1
+# now ocr version is 0.1
+
 version=""
 type=""
 function use_age(){
@@ -40,13 +42,13 @@ if [ -z $version ]; then
 fi
 
 case $type in
-    dev)
-        echo "dev"
-        docker build -t ocr_dev:${version} -f Dockerfile.dev .
-        ;;
     base)
         echo "base"
         docker build -t base:${version} -f Dockerfile.base .
+        ;;
+    dev)
+        echo "dev"
+        docker build -t dev:${version} -f Dockerfile.dev .
         ;;
     ocr)
         echo "build ocr image $version"
