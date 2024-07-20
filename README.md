@@ -9,3 +9,5 @@
 + base image is base:0.1
 
 
+### ocr image
++ base image is dev:0.1
