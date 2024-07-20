@@ -1,20 +1,22 @@
 # base image
 FROM ubuntu:22.04
 
-RUN cp /etc/apt/source.list /etc/apt/source.list.bk
+# RUN cp /etc/apt/sources.list /etc/apt/sources.list.bk && rm -rf /etc/apt/sources.list
 
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse" >> /etc/apt/source.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse" > /etc/apt/source.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse" > /etc/apt/source.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" > /etc/apt/source.list
+# RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse" >> /etc/apt/sources.list
+# RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse" >> /etc/apt/sources.list
+# RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse" >> /etc/apt/sources.list
+# RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list
+# RUN echo "deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse" >> /etc/apt/sources.list
 
-RUN apt-get update
+RUN apt-get update && apt-get upgrade
 
-RUN apt-get install zsh oh-my-zsh
+#base tools
+RUN apt install curl wget git vim -y 
+RUN apt install zsh -y && chsh -s /bin/zsh
+RUN sh -c "$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)"
 
-RUN apt-get install build-base
-
-CMD ["/bin/bash"]
+CMD ["/bin/zsh"]
 
 
 
