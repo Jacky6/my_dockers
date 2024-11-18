@@ -43,11 +43,11 @@ fi
 
 case $type in
     base)
-        echo "base"
+        echo "build base image $version"
         docker build -t base:${version} -f Dockerfile.base .
         ;;
     dev)
-        echo "dev"
+        echo "build dev image $version"
         docker build -t dev:${version} -f Dockerfile.dev .
         ;;
     ocr)
